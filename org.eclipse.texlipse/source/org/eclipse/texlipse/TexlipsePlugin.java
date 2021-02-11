@@ -290,6 +290,22 @@ public class TexlipsePlugin extends AbstractUIPlugin {
         return stat(msg, null);
     }
     
+	/**
+	 * Logs an internal error with the specified throwable
+	 * @param e the exception to be logged
+	 */
+	public static void log(Throwable e) {
+		getDefault().getLog().log(new Status(IStatus.ERROR, getPluginId(), IStatus.ERROR, e.getMessage(), e));
+	}
+
+	/**
+	 * Logs the specified status with this plug-in's log.
+	 * @param status status to log
+	 */
+	public static void log(IStatus status) {
+		getDefault().getLog().log(status);
+	}
+
     /**
      * Display a message in the Eclipse's Error Log.
      * This is equivalent to calling <code>log(msg, t, IStatus.ERROR)</code>.

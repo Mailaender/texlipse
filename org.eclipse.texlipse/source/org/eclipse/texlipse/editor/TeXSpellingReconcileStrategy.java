@@ -34,7 +34,7 @@ import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.jface.text.source.IAnnotationModelExtension;
 import org.eclipse.jface.text.source.ISourceViewer;
-import org.eclipse.texlipse.spelling.TexSpellingEngine.TexSpellingProblem;
+import org.eclipse.texlipse.spelling.TexSpellingProblem;
 import org.eclipse.ui.texteditor.spelling.ISpellingProblemCollector;
 import org.eclipse.ui.texteditor.spelling.SpellingAnnotation;
 import org.eclipse.ui.texteditor.spelling.SpellingContext;
@@ -113,8 +113,7 @@ public class TeXSpellingReconcileStrategy implements IReconcilingStrategy, IReco
             }
             return false;
         }
-        
-        
+
         /*
          * @see org.eclipse.ui.texteditor.spelling.ISpellingProblemCollector#endCollecting()
          */
@@ -132,7 +131,8 @@ public class TeXSpellingReconcileStrategy implements IReconcilingStrategy, IReco
                             //Update position (Bug 2983142)
                             SpellingAnnotation spAnn = (SpellingAnnotation) annotation;
                             TexSpellingProblem problem = (TexSpellingProblem) spAnn.getSpellingProblem();
-                            problem.setOffset(p.getOffset());
+                            
+                            //problem.setOffset(p.getOffset());
                         }
                     }
                 }
@@ -158,6 +158,8 @@ public class TeXSpellingReconcileStrategy implements IReconcilingStrategy, IReco
 
     /** Text content type */
     private static final IContentType TEXT_CONTENT_TYPE= Platform.getContentTypeManager().getContentType(IContentTypeManager.CT_TEXT);
+
+	public static final int SPELLING_PROBLEM_ID = 0x80000000;
 
     /** The text editor to operate on. */
     private ISourceViewer fViewer;

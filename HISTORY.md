@@ -6,8 +6,6 @@ TeXlipse version 1.5.0 was developed from 1.0 as an open source project on Sourc
 
 Since 1.5.0 TeXlipse has been taken over by the Eclipse Foundation and is being developed by a team from the [Eclipse Science Working Group](https://science.eclipse.org "Eclipse Science Working Group"). The first release from this team will be numbered 2.0.0.
 
-TeXlipse uses [Jazzy](http://jazzy.sourceforge.net/ "Jazzy") since version 1.4.0 for spell checking.
-
 # Current status
 
 The TeXlipse project has been dormant for a few years, but it is still very popular with it's users. So committers from the Eclipse Foundation has volunteered to maintain it for the benefit of us all. It may be a while before we're happy with the situation, as there is a lot of work to do before everything is up to date. We'll do a new release as soon as we can, after that we'll start mending the code and documentation – and maybe do some improvements.

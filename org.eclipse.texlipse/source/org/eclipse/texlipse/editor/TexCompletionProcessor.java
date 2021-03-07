@@ -38,7 +38,7 @@ import org.eclipse.texlipse.model.ReferenceManager;
 import org.eclipse.texlipse.model.TexCommandEntry;
 import org.eclipse.texlipse.model.TexDocumentModel;
 import org.eclipse.texlipse.model.TexStyleCompletionManager;
-import org.eclipse.texlipse.spelling.SpellChecker;
+import org.eclipse.texlipse.spelling.SpellCheckEngine;
 import org.eclipse.texlipse.templates.TexContextType;
 import org.eclipse.texlipse.templates.TexTemplateCompletion;
 import org.eclipse.texlipse.texparser.LatexParserUtils;
@@ -47,7 +47,7 @@ import org.eclipse.ui.texteditor.HippieProposalProcessor;
 /**
  * Implements a LaTeX-content assistant for displaying a list of completions for
  * \ref, \pageref and \cite. For BibTeX-completions (\cite), the details of the
- * selected entry are displayed. The actualy completions are fetched from the
+ * selected entry are displayed. The actual completions are fetched from the
  * ReferenceManager, owned by the TexDocumentModel of the current document.
  * 
  * @author Oskar Ojala
@@ -137,6 +137,8 @@ public class TexCompletionProcessor implements IContentAssistProcessor {
 					if (proposals == null) {
 						// Maybe there is a wrong spelled word here (e.g.
 						// \section{Wroang ...})
+						
+						ISpellCheckEngine spellCheck = SpellCheckEngine.getInstance();
 						proposals = SpellChecker.getSpellingProposal(offset,
 								fviewer);
 						if (proposals != null && proposals.length > 0) {

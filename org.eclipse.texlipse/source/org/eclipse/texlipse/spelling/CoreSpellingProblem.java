@@ -18,6 +18,8 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.osgi.util.NLS;
+import org.eclipse.texlipse.editor.TeXSpellingReconcileStrategy;
+import org.eclipse.texlipse.ui.TexUIMessages;
 
 /**
  * Spelling problem to be accepted by problem requesters.
@@ -106,7 +108,7 @@ public class CoreSpellingProblem extends AbstractPersistableProblem {
 	 */
 	@Override
 	public int getID() {
-		return CSpellingReconcileStrategy.SPELLING_PROBLEM_ID;
+		return TeXSpellingReconcileStrategy.SPELLING_PROBLEM_ID;
 	}
 
 	/*
@@ -124,7 +126,7 @@ public class CoreSpellingProblem extends AbstractPersistableProblem {
 	 */
 	@Override
 	public String getMessageWithLocation() {
-		return NLS.bind(Messages.Spelling_msgWithLocation, new Object[] { fMessage, fOrigin, fLineNumber });
+		return NLS.bind(TexUIMessages.Spelling_msgWithLocation, new Object[] { fMessage, fOrigin, fLineNumber });
 	}
 
 	/*

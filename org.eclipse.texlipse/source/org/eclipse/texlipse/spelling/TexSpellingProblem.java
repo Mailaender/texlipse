@@ -19,8 +19,6 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.runtime.Assert;
-import org.eclipse.jdt.internal.ui.text.javadoc.IHtmlTagConstants;
-import org.eclipse.jdt.ui.text.java.IJavaCompletionProposal;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
@@ -138,7 +136,7 @@ public class TexSpellingProblem extends SpellingProblem {
 				context= new TextInvocationContext(context.getSourceViewer(), getOffset(), getLength());
 
 			// FIXME: this is a pretty ugly hack
-			fixed= arguments[0].charAt(0) == ITexTagConstants.TEX_TAG_PREFIX
+			fixed= arguments[0].charAt(0) == ITexTagConstants.TEX_TAG_PREFIX;
 
 			if ((sentence && match) && !fixed)
 				result= new ITexCompletionProposal[] { new ChangeCaseProposal(
@@ -159,7 +157,7 @@ public class TexSpellingProblem extends SpellingProblem {
 				}
 
 				boolean extendable= !fixed ? (checker.acceptsWords() || AddWordProposal.canAskToConfigure()) : false;
-				result= new IJavaCompletionProposal[size + (extendable ? 3 : 2)];
+				result= new ITexCompletionProposal[size + (extendable ? 3 : 2)];
 
 				for (index= 0; index < size; index++) {
 

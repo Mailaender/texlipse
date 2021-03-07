@@ -12,11 +12,13 @@
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.jdt.internal.ui.text.spelling;
+package org.eclipse.texlipse.spelling;
 
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
-
+import org.eclipse.texlipse.spelling.engine.ISpellCheckEngine;
+import org.eclipse.texlipse.spelling.engine.ISpellChecker;
+import org.eclipse.texlipse.ui.TexUIMessages;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.text.quickassist.IQuickAssistInvocationContext;
@@ -24,22 +26,12 @@ import org.eclipse.jface.text.source.ISourceViewer;
 
 import org.eclipse.ui.texteditor.spelling.SpellingProblem;
 
-import org.eclipse.jdt.internal.corext.util.Messages;
-
-import org.eclipse.jdt.ui.text.java.IJavaCompletionProposal;
-
-import org.eclipse.jdt.internal.ui.JavaPluginImages;
-import org.eclipse.jdt.internal.ui.JavaUIMessages;
-import org.eclipse.jdt.internal.ui.text.correction.IProposalRelevance;
-import org.eclipse.jdt.internal.ui.text.spelling.engine.ISpellCheckEngine;
-import org.eclipse.jdt.internal.ui.text.spelling.engine.ISpellChecker;
-
 /**
  * Proposal to ignore the word during the current editing session.
  *
  * @since 3.0
  */
-public class WordIgnoreProposal implements IJavaCompletionProposal {
+public class WordIgnoreProposal implements ITexCompletionProposal {
 
 	/** The invocation context */
 	private IQuickAssistInvocationContext fContext;

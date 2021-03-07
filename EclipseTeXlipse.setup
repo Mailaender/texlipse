@@ -158,13 +158,6 @@
       successor="git.import.texlipse"
       filter=""
       name="Import dependencies">
-    <setupTask
-        xsi:type="setup:ResourceCopyTask"
-        excludedTriggers="BOOTSTRAP"
-        sourceURL="https://resheim.net/texlipse/jazzy-core.jar"
-        targetURL="${git.clone.texlipse.location|uri}/org.eclipse.texlipse/jazzy-core.jar">
-      <description>Import dependency</description>
-    </setupTask>
   </setupTask>
   <setupTask
       xsi:type="setup:CompoundTask"

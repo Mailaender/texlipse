@@ -22,7 +22,6 @@ import org.eclipse.texlipse.bibeditor.BibColorProvider;
 import org.eclipse.texlipse.builder.BuilderRegistry;
 import org.eclipse.texlipse.builder.ProgramRunner;
 import org.eclipse.texlipse.editor.ColorManager;
-import org.eclipse.texlipse.spelling.SpellChecker;
 import org.eclipse.texlipse.viewer.ViewerAttributeRegistry;
 import org.eclipse.texlipse.viewer.util.FileLocationClient;
 
@@ -83,8 +82,6 @@ public class TexlipsePreferenceInitializer extends
         BibColorProvider.initializeDefaults(pref);
         
         ViewerAttributeRegistry.initializeDefaults(pref);
-        
-        SpellChecker.initializeDefaults(pref);
         
         pref.setDefault(TexlipseProperties.BUILD_ENV_SETTINGS, "");
         pref.setDefault(TexlipseProperties.VIEWER_ENV_SETTINGS, "");

@@ -70,7 +70,7 @@ public interface ISpellChecker {
 	 * @param word
 	 *                   The word to retrieve the proposals for
 	 * @param sentence
-	 *                   <code>true</code> iff the proposals should start a
+	 *                   <code>true</code> if the proposals should start a
 	 *                   sentence, <code>false</code> otherwise
 	 * @return Set of ranked proposals for the word
 	 */

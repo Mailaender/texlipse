@@ -22,6 +22,7 @@ import org.eclipse.osgi.util.NLS;
 public final class TexUIMessages extends NLS {
 
 	private static final String BUNDLE_NAME= "org.eclipse.texlipse.ui.TexUIMessages";//$NON-NLS-1$
+	
 
 	private TexUIMessages() {
 		// Do not instantiate
@@ -42,6 +43,7 @@ public final class TexUIMessages extends NLS {
 	public static String Spelling_case_label;
 	public static String Spelling_error_case_label;
 	public static String AbstractSpellingDictionary_encodingError;
+	public static String Spelling_msgWithLocation;
 
 
 	static {

@@ -18,14 +18,10 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.jdt.core.ICompilationUnit;
-import org.eclipse.jdt.internal.ui.text.javadoc.IHtmlTagConstants;
-import org.eclipse.jdt.ui.text.java.IInvocationContext;
-import org.eclipse.jdt.ui.text.java.IJavaCompletionProposal;
-import org.eclipse.jdt.ui.text.java.IProblemLocation;
 import org.eclipse.jface.text.quickassist.IQuickAssistInvocationContext;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.TextInvocationContext;
+import org.eclipse.texlipse.editor.TeXSpellingReconcileStrategy;
 import org.eclipse.texlipse.spelling.engine.ISpellCheckEngine;
 import org.eclipse.texlipse.spelling.engine.ISpellChecker;
 import org.eclipse.texlipse.spelling.engine.RankedWordProposal;
@@ -50,7 +46,7 @@ public class WordQuickFixProcessor implements IQuickFixProcessor {
 	 * @see org.eclipse.jdt.ui.text.java.IQuickFixProcessor#getCorrections(org.eclipse.jdt.ui.text.java.IInvocationContext,org.eclipse.jdt.ui.text.java.IProblemLocation[])
 	 */
 	@Override
-	public IJavaCompletionProposal[] getCorrections(IInvocationContext invocationContext, IProblemLocation[] locations) throws CoreException {
+	public ITexCompletionProposal[] getCorrections(IInvocationContext invocationContext, IProblemLocation[] locations) throws CoreException {
 
 		final int threshold= PreferenceConstants.getPreferenceStore().getInt(PreferenceConstants.SPELLING_PROPOSAL_THRESHOLD);
 
@@ -60,7 +56,7 @@ public class WordQuickFixProcessor implements IQuickFixProcessor {
 
 		IProblemLocation location= null;
 		RankedWordProposal proposal= null;
-		IJavaCompletionProposal[] result= null;
+		ITexCompletionProposal[] result= null;
 
 		boolean fixed= false;
 		boolean match= false;
@@ -79,17 +75,17 @@ public class WordQuickFixProcessor implements IQuickFixProcessor {
 					sourceViewer= ((IQuickAssistInvocationContext)invocationContext).getSourceViewer();
 				IQuickAssistInvocationContext context= new TextInvocationContext(sourceViewer, location.getOffset(), location.getLength());
 
-				if (location.getProblemId() == JavaSpellingReconcileStrategy.SPELLING_PROBLEM_ID) {
+				if (location.getProblemId() == TeXSpellingReconcileStrategy.SPELLING_PROBLEM_ID) {
 
 					arguments= location.getProblemArguments();
 					if (arguments != null && arguments.length > 4) {
 
 						sentence= Boolean.parseBoolean(arguments[3]);
 						match= Boolean.parseBoolean(arguments[4]);
-						fixed= arguments[0].charAt(0) == ITexTagConstants.HTML_TAG_PREFIX || arguments[0].charAt(0) == IJavaDocTagConstants.JAVADOC_TAG_PREFIX;
+						fixed= arguments[0].charAt(0) == ITexTagConstants.TEX_TAG_PREFIX;
 
 						if ((sentence && match) && !fixed)
-							result= new IJavaCompletionProposal[] { new ChangeCaseProposal(arguments, location.getOffset(), location.getLength(), context, engine.getLocale())};
+							result= new ITexCompletionProposal[] { new ChangeCaseProposal(arguments, location.getOffset(), location.getLength(), context, engine.getLocale())};
 						else {
 
 							proposals= new ArrayList<>(checker.getProposals(arguments[0], sentence));
@@ -103,7 +99,7 @@ public class WordQuickFixProcessor implements IQuickFixProcessor {
 							}
 
 							boolean extendable= !fixed ? (checker.acceptsWords() || AddWordProposal.canAskToConfigure()) : false;
-							result= new IJavaCompletionProposal[size + (extendable ? 3 : 2)];
+							result= new ITexCompletionProposal[size + (extendable ? 3 : 2)];
 
 							for (index= 0; index < size; index++) {
 
@@ -130,14 +126,7 @@ public class WordQuickFixProcessor implements IQuickFixProcessor {
 	 */
 	@Override
 	public final boolean hasCorrections(ICompilationUnit unit, int id) {
-		return id == JavaSpellingReconcileStrategy.SPELLING_PROBLEM_ID;
+		return id == TeXSpellingReconcileStrategy.SPELLING_PROBLEM_ID;
 	}
 
-	@Override
-	public org.eclipse.texlipse.ui.IJavaCompletionProposal[] getCorrections(
-			org.eclipse.texlipse.ui.IInvocationContext context, org.eclipse.texlipse.ui.IProblemLocation[] locations)
-			throws CoreException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

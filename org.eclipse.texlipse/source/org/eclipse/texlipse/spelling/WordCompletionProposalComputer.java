@@ -30,6 +30,8 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.contentassist.IContextInformation;
+import org.eclipse.texlipse.TexlipsePlugin;
+import org.eclipse.texlipse.editor.TexCompletionProposal;
 import org.eclipse.texlipse.spelling.engine.ISpellCheckEngine;
 import org.eclipse.texlipse.spelling.engine.ISpellChecker;
 import org.eclipse.texlipse.spelling.engine.RankedWordProposal;
@@ -47,7 +49,7 @@ import org.eclipse.texlipse.ui.PreferenceConstants;
  *
  * @since 3.0
  */
-public final class WordCompletionProposalComputer implements IJavaCompletionProposalComputer {
+public final class WordCompletionProposalComputer implements ITexCompletionProposalComputer {
 
 	/** The prefix rank shift */
 	private static final int PREFIX_RANK_SHIFT= 500;
@@ -87,7 +89,7 @@ public final class WordCompletionProposalComputer implements IJavaCompletionProp
 							if (text.startsWith(candidate))
 								word.setRank(word.getRank() + PREFIX_RANK_SHIFT);
 
-							result.add(new JavaCompletionProposal(text, start, candidate.length(), JavaPluginImages.get(JavaPluginImages.IMG_CORRECTION_RENAME), text, word.getRank()) {
+							result.add(new TexCompletionProposal(text, start, candidate.length(), TexlipsePlugin.get(TexlipsePlugin.getImage(name).IMG_CORRECTION_RENAME), text, word.getRank()) {
 								/*
 								* @see org.eclipse.jdt.internal.ui.text.java.JavaCompletionProposal#validate(org.eclipse.jface.text.IDocument, int, org.eclipse.jface.text.DocumentEvent)
 								*/
@@ -103,7 +105,7 @@ public final class WordCompletionProposalComputer implements IJavaCompletionProp
 				}
 			} catch (BadLocationException exception) {
 				// log & ignore
-				JavaPlugin.log(exception);
+				TexlipsePlugin.log(exception);
 			}
 		}
 		return Collections.emptyList();
